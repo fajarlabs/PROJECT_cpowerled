@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace CPower_CSharp
+namespace RunningText
 {
     public class CP5200
     {

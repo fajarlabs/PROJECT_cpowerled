@@ -58,6 +58,10 @@ namespace RunningText
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
+            CpowerUse cpu = new CpowerUse();
+
+            //cpu.sendTextToCom("COM3", 1, 115200, "12345678");
+            //cpu.sendTextToNetwork("10.1.12.105", "255.255.255.255", "87654321");
 
             // connect to database
             if (cmb_vendor.SelectedItem != null)

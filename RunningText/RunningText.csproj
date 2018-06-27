@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComboboxItem.cs" />
+    <Compile Include="CP5200.cs" />
+    <Compile Include="CpowerUse.cs" />
     <Compile Include="form_connection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CP5200.dll" />
+    <Content Include="LafDll.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
