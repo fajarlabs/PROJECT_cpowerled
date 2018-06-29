@@ -66,6 +66,8 @@
     <Compile Include="PostgreSQLDBConnect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemporaryEntity.cs" />
+    <Compile Include="TextImage.cs" />
     <EmbeddedResource Include="form_connection.resx">
       <DependentUpon>form_connection.cs</DependentUpon>
     </EmbeddedResource>

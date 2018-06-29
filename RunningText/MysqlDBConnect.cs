@@ -85,9 +85,8 @@ namespace RunningText
         }
 
         //Insert statement
-        public void Insert()
+        public void Insert(String query)
         {
-            string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
 
             //open connection
             if (this.OpenConnection() == true)
@@ -104,9 +103,8 @@ namespace RunningText
         }
 
         //Update statement
-        public void Update()
+        public void Update(String query)
         {
-            string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -127,9 +125,8 @@ namespace RunningText
         }
 
         //Delete statement
-        public void Delete()
+        public void Delete(String query)
         {
-            string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
             if (this.OpenConnection() == true)
             {
@@ -140,33 +137,40 @@ namespace RunningText
         }
 
         //Select statement
-        public List<List<String>> Select()
+        public List<TemporaryEntity> Select(String query)
         {
-            string query = "SELECT * FROM tableinfo";
 
             //Create a list to store the result
-            List<List<String>>list = new List<List<string>>();
+            List<TemporaryEntity> list = new List<TemporaryEntity>();
 
             //Open connection
             if (this.OpenConnection() == true)
             {
                 //Create Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                //Read the data and store them in the list
-                while (dataReader.Read())
+                try
                 {
-                    List<String> items = new List<String>();
-                    items.Add((String)dataReader["id"]);
-                    items.Add((String)dataReader["name"]);
-                    items.Add((String)dataReader["age"]);
-                    list.Add(items);
-                }
+                    //Create a data reader and Execute the command
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                //close Data Reader
-                dataReader.Close();
+                    //Read the data and store them in the list
+                    while (dataReader.Read())
+                    {
+                        TemporaryEntity obj = new TemporaryEntity();
+                        obj.id = (int)dataReader["id"];
+                        obj.ip = (String)dataReader["ip"];
+                        obj.running_text = (String)dataReader["running_text"];
+                        obj.status = (int)dataReader["status"];
+                        list.Add(obj);
+                    }
+
+                    //close Data Reader
+                    dataReader.Close();
+                }catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
                 //close Connection
                 this.CloseConnection();
@@ -181,9 +185,8 @@ namespace RunningText
         }
 
         //Count statement
-        public int Count()
+        public int Count(String query)
         {
-            string query = "SELECT Count(*) FROM tableinfo";
             int Count = -1;
 
             //Open Connection
