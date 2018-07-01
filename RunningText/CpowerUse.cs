@@ -20,6 +20,8 @@ namespace RunningText
         public int m_nTimeout { set; get; }
         // card led tujuan, seperti 1,2,3 dan seterusnya
         private int m_nCardID { set; get; }
+        // window view
+        private int m_nWindowNo { set; get; }
 
         // for Communication RS232
         // setting variable ini sebelum menggunakan komunikasi
@@ -40,22 +42,24 @@ namespace RunningText
         public CpowerUse() { }
 
         // Constructor & overload for using network communication
-        public CpowerUse(byte CommType, int TimeOut, int CardId, string IP, int port, String IdCode)
+        public CpowerUse(byte CommType, int TimeOut, int CardId,int WindNo, string IP, int port, String IdCode)
         {
             m_nCommType = CommType;
             m_nTimeout = TimeOut;
             m_nCardID = CardId;
+            m_nWindowNo = WindNo;
             IPAddr = IP;
             m_nIPPort = port;
             IDCode = IdCode;
         }
 
         // Constructor & overload for using network communication
-        public CpowerUse(byte CommType, int TimeOut, int CardId, int BaudRate, int Port)
+        public CpowerUse(byte CommType, int TimeOut, int CardId,int WindNo, int BaudRate, int Port)
         {
             m_nCommType = 0;
             m_nTimeout = 600;
             m_nCardID = CardId;
+            m_nWindowNo = WindNo;
             m_nBaudrate = BaudRate;
             m_nPort = Port;
         }
@@ -127,12 +131,12 @@ namespace RunningText
             {
                 if (0 == m_nCommType)
                 {
-                    ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, 0, 0, 0, img.Width, img.Height, 
+                    ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height, 
                         Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
 
                 } else
                 {
-                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, 0, 4, 0, img.Width, img.Height,
+                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, m_nWindowNo, 4, 0, img.Width, img.Height,
                     Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
                 }
 
@@ -172,11 +176,11 @@ namespace RunningText
             {
                 if (0 == m_nCommType)
                 {
-                    ret = CP5200.CP5200_RS232_SplitScreen(m_nCardID, width, height, 1, nWndRect);
+                    ret = CP5200.CP5200_RS232_SplitScreen(m_nCardID, width, height, 0, nWndRect);
                 }
                 else
                 {
-                    ret = CP5200.CP5200_Net_SplitScreen(m_nCardID, width, height, 1, nWndRect);
+                    ret = CP5200.CP5200_Net_SplitScreen(m_nCardID, width, height, 0, nWndRect);
                 }
             }
 

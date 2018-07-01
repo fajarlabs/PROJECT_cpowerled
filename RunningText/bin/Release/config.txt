@@ -1,0 +1,9 @@
+vendor:MySQL
+hostname:127.0.0.1
+port:3306
+username:root
+password:
+database:server_running_text
+table:temporary
+ip:10.1.12.105
+idcode:255.255.255.255

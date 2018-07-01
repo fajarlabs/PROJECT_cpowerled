@@ -1,0 +1,14 @@
+D:\cp5200\RunningText\RunningText\bin\Release\RunningText.exe.config
+D:\cp5200\RunningText\RunningText\bin\Release\RunningText.exe
+D:\cp5200\RunningText\RunningText\bin\Release\RunningText.pdb
+D:\cp5200\RunningText\RunningText\bin\Release\MySql.Data.dll
+D:\cp5200\RunningText\RunningText\bin\Release\Npgsql.dll
+D:\cp5200\RunningText\RunningText\bin\Release\Google.Protobuf.dll
+D:\cp5200\RunningText\RunningText\bin\Release\MySql.Data.xml
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.form_connection.resources
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.Properties.Resources.resources
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csproj.GenerateResource.cache
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csproj.CoreCompileInputs.cache
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csproj.CopyComplete
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.exe
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.pdb
