@@ -136,7 +136,7 @@ namespace RunningText
 
                 } else
                 {
-                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, m_nWindowNo, 4, 0, img.Width, img.Height,
+                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height,
                     Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
                 }
 

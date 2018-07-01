@@ -12,3 +12,4 @@ D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csproj.CoreCompileInpu
 D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csproj.CopyComplete
 D:\cp5200\RunningText\RunningText\obj\Release\RunningText.exe
 D:\cp5200\RunningText\RunningText\obj\Release\RunningText.pdb
+D:\cp5200\RunningText\RunningText\obj\Release\RunningText.csprojResolveAssemblyReference.cache

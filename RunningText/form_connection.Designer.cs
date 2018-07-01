@@ -282,6 +282,7 @@
             this.Controls.Add(this.label1);
             this.Name = "form_connection";
             this.Text = "Running Text Controller (v.01)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form_connection_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

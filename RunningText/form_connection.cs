@@ -29,6 +29,9 @@ namespace RunningText
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // center form
+            CenterToScreen();
+
             ComboboxItem item1 = new ComboboxItem();
             item1.Text = "MySQL";
             item1.Value = 1;
@@ -169,6 +172,9 @@ namespace RunningText
                                     Console.WriteLine(e.Message);
                                 }
                             }
+                        } else
+                        {
+
                         }
 
                         mysql.Update("UPDATE `" + tb_table.Text + "` SET `status` = '0' WHERE `id` = '" + row[i].id + "'");
@@ -307,6 +313,7 @@ namespace RunningText
                     {
                         childref = new ThreadStart(CallToChildThread);
                         thread = new Thread(childref);
+                        thread.IsBackground = false;
                         thread.Start();
                     }
 
@@ -325,6 +332,20 @@ namespace RunningText
                 flag_thread = true;
                 this.enabled_all_element();
             }
+        }
+
+        private void form_connection_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure to close this Running Text controller?",
+                                                 "Confirmation Exit",
+                                                 MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                Application.ExitThread();
+                Environment.Exit(0);
+            }
+            
+            e.Cancel = (confirmResult == DialogResult.No);
         }
     }
 }
