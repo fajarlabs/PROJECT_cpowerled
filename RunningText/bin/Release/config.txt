@@ -1,8 +1,8 @@
 vendor:MySQL
-hostname:127.0.0.1
+hostname:192.168.1.9
 port:3306
-username:root
-password:
+username:ridwansyah
+password:123
 database:server_running_text
 table:temporary
 ip:10.1.12.105

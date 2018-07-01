@@ -113,8 +113,12 @@ namespace RunningText
             try
             {
                 MysqlDBConnect mysql = new MysqlDBConnect(tb_hostname.Text, Int32.Parse(tb_port.Text), tb_database.Text, tb_username.Text, tb_password.Text);
+
                 CpowerUse cpu = null;
-                CpowerUse cpu2 = null;
+                byte mode = 1; // 1 is use network
+                int CardID = 1;
+                cpu = new CpowerUse(mode, 600, CardID, tb_ip.Text, 5200, tb_idcode.Text);
+                
 
                 while (true)
                 {
@@ -126,21 +130,16 @@ namespace RunningText
 
                     if (row.Count > 0)
                     {
+
                         if (row[i].running_text.Contains(';'))
                         {
                             string[] words = row[i].running_text.Split(';');
                             if(words.Count() > 1)
                             {
+                                cpu.InitComm(1);
                                 // Window 1
                                 TextImage tempImg = new TextImage(words[0]+" ", TextImage.defaultFont, Color.Red, Color.Black);
-                                byte mode = 1; // 1 is use network
-                                int CardID = 1;
-                                int WindowNo = 0;
-                                if (cpu == null)
-                                {
-                                    cpu = new CpowerUse(mode, 600, CardID, WindowNo, row[i].ip, 5200, tb_idcode.Text);
-                                }
-                                cpu.SendImg(tempImg, 0);
+                                cpu.SendImg(tempImg, 0,0);
 
                                 // remove output image 1
                                 try
@@ -153,14 +152,7 @@ namespace RunningText
 
                                 // Window 2
                                 TextImage tempImg2 = new TextImage(words[1]+" ", TextImage.defaultFont, Color.Red, Color.Black);
-                                byte mode2 = 1; // 1 is use network
-                                int CardID2 = 1;
-                                int WindowNo2 = 1;
-                                if(cpu2 == null)
-                                {
-                                    cpu2 = new CpowerUse(mode2, 600, CardID2, WindowNo2, row[i].ip, 5200, tb_idcode.Text);
-                                }
-                                cpu2.SendImg(tempImg2, 0);
+                                cpu.SendImg(tempImg2, 0, 1);
 
                                 // remove output image 1
                                 try
@@ -172,9 +164,11 @@ namespace RunningText
                                     Console.WriteLine(e.Message);
                                 }
                             }
-                        } else
+                        }
+                        else
                         {
-
+                            cpu.InitComm(0);
+                            cpu.SendTextToNetwork(row[i].running_text);
                         }
 
                         mysql.Update("UPDATE `" + tb_table.Text + "` SET `status` = '0' WHERE `id` = '" + row[i].id + "'");

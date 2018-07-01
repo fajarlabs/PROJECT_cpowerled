@@ -63,7 +63,7 @@
             // cmb_vendor
             // 
             this.cmb_vendor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.cmb_vendor.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmb_vendor.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_vendor.FormattingEnabled = true;
             this.cmb_vendor.Location = new System.Drawing.Point(16, 33);
             this.cmb_vendor.Name = "cmb_vendor";
@@ -83,10 +83,10 @@
             // tb_hostname
             // 
             this.tb_hostname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.tb_hostname.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_hostname.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_hostname.Location = new System.Drawing.Point(16, 72);
             this.tb_hostname.Name = "tb_hostname";
-            this.tb_hostname.Size = new System.Drawing.Size(168, 21);
+            this.tb_hostname.Size = new System.Drawing.Size(168, 20);
             this.tb_hostname.TabIndex = 3;
             this.tb_hostname.Text = "127.0.0.1";
             // 
@@ -103,10 +103,10 @@
             // tb_port
             // 
             this.tb_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.tb_port.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_port.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_port.Location = new System.Drawing.Point(190, 72);
             this.tb_port.Name = "tb_port";
-            this.tb_port.Size = new System.Drawing.Size(89, 21);
+            this.tb_port.Size = new System.Drawing.Size(89, 20);
             this.tb_port.TabIndex = 5;
             this.tb_port.Text = "3306";
             this.tb_port.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_port_KeyPress);
@@ -123,11 +123,11 @@
             // 
             // tb_username
             // 
-            this.tb_username.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.tb_username.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_username.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_username.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_username.Location = new System.Drawing.Point(16, 112);
             this.tb_username.Name = "tb_username";
-            this.tb_username.Size = new System.Drawing.Size(125, 21);
+            this.tb_username.Size = new System.Drawing.Size(125, 20);
             this.tb_username.TabIndex = 7;
             this.tb_username.Text = "root";
             // 
@@ -143,20 +143,20 @@
             // 
             // tb_password
             // 
-            this.tb_password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.tb_password.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_password.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_password.Location = new System.Drawing.Point(147, 112);
             this.tb_password.Name = "tb_password";
-            this.tb_password.Size = new System.Drawing.Size(132, 21);
+            this.tb_password.Size = new System.Drawing.Size(132, 20);
             this.tb_password.TabIndex = 9;
             // 
             // tb_table
             // 
-            this.tb_table.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.tb_table.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_table.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_table.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_table.Location = new System.Drawing.Point(147, 151);
             this.tb_table.Name = "tb_table";
-            this.tb_table.Size = new System.Drawing.Size(132, 21);
+            this.tb_table.Size = new System.Drawing.Size(132, 20);
             this.tb_table.TabIndex = 13;
             this.tb_table.Text = "temporary";
             // 
@@ -172,11 +172,11 @@
             // 
             // tb_database
             // 
-            this.tb_database.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.tb_database.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_database.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_database.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_database.Location = new System.Drawing.Point(16, 151);
             this.tb_database.Name = "tb_database";
-            this.tb_database.Size = new System.Drawing.Size(125, 21);
+            this.tb_database.Size = new System.Drawing.Size(125, 20);
             this.tb_database.TabIndex = 11;
             this.tb_database.Text = "server_running_text";
             // 
@@ -216,11 +216,11 @@
             // 
             // tb_idcode
             // 
-            this.tb_idcode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.tb_idcode.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_idcode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_idcode.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_idcode.Location = new System.Drawing.Point(147, 190);
             this.tb_idcode.Name = "tb_idcode";
-            this.tb_idcode.Size = new System.Drawing.Size(132, 21);
+            this.tb_idcode.Size = new System.Drawing.Size(132, 20);
             this.tb_idcode.TabIndex = 19;
             this.tb_idcode.Text = "255.255.255.255";
             // 
@@ -236,11 +236,11 @@
             // 
             // tb_ip
             // 
-            this.tb_ip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.tb_ip.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_ip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.tb_ip.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_ip.Location = new System.Drawing.Point(16, 190);
             this.tb_ip.Name = "tb_ip";
-            this.tb_ip.Size = new System.Drawing.Size(125, 21);
+            this.tb_ip.Size = new System.Drawing.Size(125, 20);
             this.tb_ip.TabIndex = 17;
             this.tb_ip.Text = "10.1.12.105";
             // 
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(293, 267);
             this.Controls.Add(this.tb_idcode);
             this.Controls.Add(this.label8);

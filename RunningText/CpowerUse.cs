@@ -42,30 +42,30 @@ namespace RunningText
         public CpowerUse() { }
 
         // Constructor & overload for using network communication
-        public CpowerUse(byte CommType, int TimeOut, int CardId,int WindNo, string IP, int port, String IdCode)
+        public CpowerUse(byte CommType, int TimeOut, int CardId, string IP, int port, String IdCode)
         {
             m_nCommType = CommType;
             m_nTimeout = TimeOut;
             m_nCardID = CardId;
-            m_nWindowNo = WindNo;
             IPAddr = IP;
             m_nIPPort = port;
             IDCode = IdCode;
         }
 
         // Constructor & overload for using network communication
-        public CpowerUse(byte CommType, int TimeOut, int CardId,int WindNo, int BaudRate, int Port)
+        public CpowerUse(byte CommType, int TimeOut, int CardId, int BaudRate, int Port)
         {
             m_nCommType = 0;
             m_nTimeout = 600;
             m_nCardID = CardId;
-            m_nWindowNo = WindNo;
             m_nBaudrate = BaudRate;
             m_nPort = Port;
         }
 
         // fungsi untuk inisialisasi communication
-        public int InitComm()
+        // jika 0 => single, 1 => 2 window
+        // screen ukuran 64x16
+        public int InitComm(int modeWindow = 0)
         {
             int nRet = 0;
             string strPort;
@@ -73,6 +73,19 @@ namespace RunningText
             {
                 strPort = "COM" + m_nPort;
                 nRet = CP5200.CP5200_RS232_InitEx(Marshal.StringToHGlobalAnsi(strPort), m_nBaudrate, m_nTimeout);
+                
+                int rt = 0;
+                if (modeWindow == 0)
+                {
+                    // format reactangle (left,up,right,down)
+                    rt = CP5200.CP5200_RS232_SplitScreen(Convert.ToByte(1), 64, 32, 1, new int[] { 0, 0, 64, 16 });
+                }
+                else
+                {
+                    // format reactangle (left,up,right,down)
+                    rt = CP5200.CP5200_RS232_SplitScreen(Convert.ToByte(1), 64, 32, 2, new int[] { 0, 0, 32, 16, 32, 0, 64, 16 });
+                }
+
             }
             else
             {
@@ -83,6 +96,23 @@ namespace RunningText
                     if (0 != m_dwIDCode)
                     {
                         CP5200.CP5200_Net_Init(m_dwIPAddr, m_nIPPort, m_dwIDCode, m_nTimeout);
+                        //CP5200.CP5200_Program_SetWindowProperty(0,0)
+                        int rt = 0;
+                        if (modeWindow == 0)
+                        {
+                            // format reactangle (left,up,right,down)
+                            rt = CP5200.CP5200_Net_SplitScreen(Convert.ToByte(1), 64, 32, 1, new int[] { 0, 0, 64, 16 });
+                        } else
+                        {
+                            // format reactangle (left,up,right,down)
+                            rt = CP5200.CP5200_Net_SplitScreen(Convert.ToByte(1), 64, 32, 2, new int[] { 0, 0, 32, 16, 32, 0, 64, 16 });
+                        }
+
+                        if(rt != 0)
+                        {
+                            MessageBox.Show("Failed split window");
+                        } 
+
                         nRet = 1;
                     }
                 }
@@ -107,39 +137,32 @@ namespace RunningText
         public int SendStaticText( int width=0, int height=0, string message="")
         {
             int ret = 0;
-
-            if (1 == InitComm())
+            if (0 == m_nCommType)
             {
-                if (0 == m_nCommType)
-                {
-                    ret = CP5200.CP5200_RS232_SendStatic(m_nCardID, 0, Marshal.StringToHGlobalAnsi(message), Color.FromArgb(255, 0, 0).ToArgb(), 16, 0, 0, 0, width, height);
-                }
-                else
-                {
-                    ret = CP5200.CP5200_Net_SendStatic(m_nCardID, 0, Marshal.StringToHGlobalAnsi(message), Color.FromArgb(255, 0, 0).ToArgb(), 16, 0, 0, 0, width, height);
-                }
+                ret = CP5200.CP5200_RS232_SendStatic(m_nCardID, 0, Marshal.StringToHGlobalAnsi(message), Color.FromArgb(255, 0, 0).ToArgb(), 16, 0, 0, 0, width, height);
+            }
+            else
+            {
+                ret = CP5200.CP5200_Net_SendStatic(m_nCardID, 0, Marshal.StringToHGlobalAnsi(message), Color.FromArgb(255, 0, 0).ToArgb(), 16, 0, 0, 0, width, height);
             }
 
             return ret;
         }
 
         // Create image temporary & send image to device
-        public int SendImg(TextImage img, int effect)
+        public int SendImg(TextImage img, int effect, int windowNumber)
         {
+            m_nWindowNo = windowNumber;
             int ret = 0;
-            if (1 == InitComm())
+            if (0 == m_nCommType)
             {
-                if (0 == m_nCommType)
-                {
-                    ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height, 
-                        Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
-
-                } else
-                {
-                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height,
+                ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height, 
                     Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
-                }
 
+            } else
+            {
+                ret = CP5200.CP5200_Net_SendPicture(m_nCardID, m_nWindowNo, 0, 0, img.Width, img.Height,
+                Marshal.StringToHGlobalAnsi(img.path), 0, effect, 3, 0);
             }
             return ret;
         }
@@ -148,22 +171,19 @@ namespace RunningText
         {
             int ret = 0;
 
-            if (1 == InitComm())
+            if (0 == m_nCommType)
             {
-                if (0 == m_nCommType)
-                {
-                    ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, 0, 0, 0, width, height, Marshal.StringToHGlobalAnsi(picture), 1, 0, 3, 0);
-                }
-                else
-                {
-                    ret = CP5200.CP5200_Net_SendPicture(m_nCardID, 0, 0, 0, width, height, Marshal.StringToHGlobalAnsi(picture), 1, 0, 3, 0);
-                }
+                ret = CP5200.CP5200_RS232_SendPicture(m_nCardID, 0, 0, 0, width, height, Marshal.StringToHGlobalAnsi(picture), 1, 0, 3, 0);
+            }
+            else
+            {
+                ret = CP5200.CP5200_Net_SendPicture(m_nCardID, 0, 0, 0, width, height, Marshal.StringToHGlobalAnsi(picture), 1, 0, 3, 0);
             }
 
             return ret;
         }
 
-        public int SplitWindow(int width=0, int height=0)
+        public int SplitWindow(int width=0, int height=0, int windCnt=0)
         {
             int ret = 0;
             int[] nWndRect = new int[4];
@@ -172,16 +192,13 @@ namespace RunningText
             nWndRect[2] = width;
             nWndRect[3] = height;
 
-            if (1 == InitComm())
+            if (0 == m_nCommType)
             {
-                if (0 == m_nCommType)
-                {
-                    ret = CP5200.CP5200_RS232_SplitScreen(m_nCardID, width, height, 0, nWndRect);
-                }
-                else
-                {
-                    ret = CP5200.CP5200_Net_SplitScreen(m_nCardID, width, height, 0, nWndRect);
-                }
+                ret = CP5200.CP5200_RS232_SplitScreen(m_nCardID, width, height, windCnt, nWndRect);
+            }
+            else
+            {
+                ret = CP5200.CP5200_Net_SplitScreen(m_nCardID, width, height, windCnt, nWndRect);
             }
 
             return ret;
@@ -198,17 +215,14 @@ namespace RunningText
             int icolor = 3000;
             int ret = 0;
 
-            if (1 == InitComm())
+            try
             {
-                try
-                {
-                    IntPtr iPtr = Marshal.StringToHGlobalAnsi(message);
-                    ret = CP5200.CP5200_RS232_SendText(m_nCardID, 0, iPtr, icolor, 16, 3, 0, 3, 0);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                IntPtr iPtr = Marshal.StringToHGlobalAnsi(message);
+                ret = CP5200.CP5200_RS232_SendText(m_nCardID, 0, iPtr, icolor, 16, 3, 0, 3, 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             return ret;
@@ -224,24 +238,21 @@ namespace RunningText
             int ret = 0;
             int icolor = 3000;
 
-            if (1 == InitComm())
+            m_dwIPAddr = GetIP(IPAddr);
+            if (0 != m_dwIPAddr)
             {
-                m_dwIPAddr = GetIP(IPAddr);
-                if (0 != m_dwIPAddr)
+                m_dwIDCode = GetIP(IDCode);
+                if (0 != m_dwIDCode)
                 {
-                    m_dwIDCode = GetIP(IDCode);
-                    if (0 != m_dwIDCode)
+                    try
                     {
-                        try
-                        {
-                            IntPtr iPtr = Marshal.StringToHGlobalAnsi(message);
-                            ret = CP5200.CP5200_Net_SendText(m_nCardID, 0, iPtr, icolor, 16, 3, 0, 3, 0);
+                        IntPtr iPtr = Marshal.StringToHGlobalAnsi(message);
+                        ret = CP5200.CP5200_Net_SendText(m_nCardID, 0, iPtr, icolor, 16, 45, 14, 3, 0);
 
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
             }
